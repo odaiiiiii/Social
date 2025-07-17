@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: "http://localhost:5173",
-     origin: "*",
+origin: "https://your-frontend-site.netlify.app",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
@@ -55,7 +55,8 @@ mongoose
 // 8. Setup Socket.io
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
+    origin:"https://timely-gnome-346710.netlify.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
