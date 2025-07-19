@@ -50,11 +50,12 @@ const login = async (req, res) => {
     );
 
     res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "Lax", 
-      secure: true, 
-      maxAge: 24 * 60 * 60 * 1000, 
-    });
+  httpOnly: true,
+  sameSite: "Lax",
+  secure: true, // **هنا يجب أن يكون true فقط لو تستخدم HTTPS (استضافة حقيقية)**
+  maxAge: 24 * 60 * 60 * 1000,
+});
+
 
      res.json({
       message: "Login successful",
