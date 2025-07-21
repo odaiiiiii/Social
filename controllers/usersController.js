@@ -1,6 +1,7 @@
 const User = require("../models/usersModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const baseURL = process.env.SOCKET_URL;
 
 const getProfile = async (req, res) => {
   try {
@@ -8,7 +9,8 @@ const getProfile = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
     const fullUser = {
       ...user._doc,
-      profileImage: `http://localhost:5000/uploadsProfile/${user.profileImage}`,
+      profileImage: `${baseURL}/uploadsProfile/${user.profileImage}`
+
     };
 
     res.json(fullUser);
@@ -31,7 +33,8 @@ const searchUsers = async (req, res) => {
     const formattedUsers = users.map((user) => ({
       _id: user._id,
       username: user.username,
-      profileImage: `http://localhost:5000/uploadsProfile/${user.profileImage}`,
+      profileImage: `${baseURL}/uploadsProfile/${user.profileImage}`
+
     }));
 
     res.json(formattedUsers);
@@ -66,7 +69,8 @@ const updateProfile = async (req, res) => {
         username: updatedUser.username,
         country: updatedUser.country,
         gender: updatedUser.gender,
-        profileImage: `http://localhost:5000/uploadsProfile/${updatedUser.profileImage}`,
+        profileImage: `${baseURL}/uploadsProfile/${updatedUser.profileImage}`
+
       },
     });
   } catch (err) {
