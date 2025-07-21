@@ -1,5 +1,6 @@
 const Friend = require("../models/friendsModel");
 const Notification = require("../models/Notification");
+const baseURL = process.env.SOCKET_URL;
 
 // Send a friend request from the logged-in user to another user
 const sendFriendRequest = async (req, res) => {
@@ -178,8 +179,8 @@ const getFriendsList = async (req, res) => {
         username: user.username,
         email: user.email,
         profileImage: user.profileImage
-          ? `http://localhost:5000/uploadsProfile/${user.profileImage}`
-          : "http://localhost:5000/uploadsProfile/profile.png",
+          ? `${baseURL}/uploadsProfile/${user.profileImage}`
+          : `${baseURL}/uploadsProfile/profile.png`,
       };
     });
 
@@ -244,8 +245,8 @@ const searchFriends = async (req, res) => {
         _id: friend._id,
         username: friend.username,
         profileImage: friend.profileImage
-          ? `http://localhost:5000/uploadsProfile/${friend.profileImage}`
-          : "http://localhost:5000/uploadsProfile/profile.png",
+          ? `${baseURL}/uploadsProfile/${friend.profileImage}`
+          : `${baseURL}/uploadsProfile/profile.png`,
       }));
 
     res.status(200).json({ friends: matchedFriends });
